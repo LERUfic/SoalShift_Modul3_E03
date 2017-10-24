@@ -23,13 +23,12 @@ int main(int argc,char *argv[]){
     int bil;
     for(int i=1;i<argc;i++){
 
-        int j=strlen(argv[i])-1;
+        int j=0;
         bil=0;
-        while(j>-1){
+        while(j<strlen(argv[i])){
             bil*=10;
             bil+=(argv[i][j]-48);
-            //printf("x: %d ",argv[i][j]-'0');
-            --j;
+            ++j;
         }
         pthread_create(&(tid[i]),NULL,&faktorial,(void*)bil);
         pthread_join(tid[i],NULL);
