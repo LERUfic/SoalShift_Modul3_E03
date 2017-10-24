@@ -9,9 +9,8 @@ pthread_t tid2;
 
 /*
 status 0 pemain1 input trap
-status 1 pemain2 tebak trap
-status 2 pemain2 input trap
-status 3 pemain1 tebak trap
+status 1 pemain2 tebak trap lalu pemain2 input trap
+status 2 pemain1 tebak trap
 
 */
 int status;
@@ -23,7 +22,8 @@ char ladang2[17];
 void* pemain1(void *arg){
 
     while(1){
-        status%=3;
+        printf("skor pemain1 : %d\nskor pemain2 : %d\n",skor1,skor2);
+        status=0;
         printf("pemain 1, [jumlah trap] [nomor ladang sebanyak jumlah trap dipisahkan spasi]\n> ");
         scanf("%d",&jumlah);
         while(jumlah--){
@@ -32,22 +32,46 @@ void* pemain1(void *arg){
         }
         status=1;
         while(status==1);
+        printf("pemain 1, [nomor ladang tebak]\n> ");
 
+        scanf("%d",&nomor);
+        if(ladang2[nomor]=='o'){
+            printf("tebakan pemain1 benar!, poin pemain1 ditambah 1\n");
+            ++skor1;
+        }
+        else{
+            printf("tebakan pemain1 salah!, poin pemain2 ditambah 1\n");
+            ++skor2;
+        }
     }
     return NULL;
 }
 
 
-void* pemain2(void *arg)
-{
+void* pemain2(void *arg){
     while(1){
-        status%=3;
+        status=0;
         while(status==0);
+        printf("pemain 2, [nomor ladang tebak]\n> ");
         scanf("%d",&nomor);
+        if(ladang1[nomor]=='o'){
+            printf("tebakan pemain2 benar!, poin pemain2 ditambah 1\n");
+            ++skor2;
+        }
+        else{
+            printf("tebakan pemain2 salah!, poin pemain1 ditambah 1\n");
+            ++skor1;
+        }
 
+        printf("skor pemain1 : %d\nskor pemain2 : %d\n",skor1,skor2);
+        printf("pemain 2, [jumlah trap] [nomor ladang sebanyak jumlah trap dipisahkan spasi]\n> ");
+        scanf("%d",&jumlah);
+        while(jumlah--){
+            scanf("%d",&nomor);
+            ladang2[nomor]='x';
+        }
+        status=2;
     }
-
-
     return NULL;
 
 }
