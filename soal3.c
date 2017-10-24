@@ -11,7 +11,7 @@ void* krglohan(void *arg){
     while(1){
         sleep(10);
         hewan[0]=hewan[0]-15;
-        printf("Kondisi Lohan %d\n", hewan[0]);
+        printf("\nKondisi Lohan %d\n", hewan[0]);
         printf("Kondisi: Kepiting %d\n", hewan[1]);
     }
 }
@@ -20,7 +20,7 @@ void* krgkepiting(void *arg){
     while(1){
         sleep(20);
         hewan[1]=hewan[1]-10;
-        printf("Kondisi Lohan %d\n", hewan[0]);
+        printf("\nKondisi Lohan %d\n", hewan[0]);
         printf("Kondisi: Kepiting %d\n", hewan[1]);
     }
 }
@@ -34,9 +34,6 @@ int main(void)
 
     pthread_create(&(tid[0]),NULL,&krglohan,NULL);
     pthread_create(&(tid[1]),NULL,&krgkepiting,NULL);
-
-    pthread_join(tid[0],NULL);
-    pthread_join(tid[1],NULL);
 
     while(1){
         if(hewan[0]<=0 || hewan[1]<=0 || hewan[0]>100 || hewan[1]>100){
@@ -55,12 +52,12 @@ int main(void)
 
             if(pilih==1){
                 hewan[0] = hewan[0]+10;
-                printf("Kondisi Lohan %d\n", hewan[0]);
+                printf("\nKondisi Lohan %d\n", hewan[0]);
                 printf("Kondisi: Kepiting %d\n", hewan[1]);
             }
             else if(pilih==2){
                 hewan[1] = hewan[1]+10;
-                printf("Kondisi Lohan %d\n", hewan[0]);
+                printf("\nKondisi Lohan %d\n", hewan[0]);
                 printf("Kondisi: Kepiting %d\n", hewan[1]);
             }
         }
