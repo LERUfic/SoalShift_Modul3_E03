@@ -12,19 +12,21 @@ stack [1,2] = masih ada yang lagi compare string
 stack -1 : terminate
 */
 int stack=2;
-char *buffer;
 void* cek_nama(void *arg){
+    FILE *fail;
+    fail =fopen("Novel.txt","r");
     char dicari[256];
     int count=0;
+    char buffer[256];
     strcpy(dicari,arg);
-    printf("dicari %s\n",dicari);
-    while(stack!=-1){
+//    printf("dicari %s\n",dicari);
+    while(fscanf(fail,"%s",&buffer)!=EOF){
         if(strstr(buffer,dicari)!=NULL){
             count++;
-            stack--;
         }
-        while(stack);
     }
+    fclose(fail);
+    printf("%s : %d\n",dicari,count);
     return NULL;
 }
 
@@ -35,21 +37,12 @@ if( argc != 3 ) {
     printf("input invalid , masukkan 2 string\n");
     return 0;
 }
-printf("benar\n");
-    fail =fopen("Novel.txt","r");
     pthread_create(&(tid1), NULL, &cek_nama,(void *)argv[1]);
     pthread_create(&(tid2), NULL, &cek_nama,(void *)argv[2]);
 
     pthread_join(tid1, NULL);
     pthread_join(tid2, NULL);
-    size_t in=0;
 
-    while(getline(&buffer,&in,fail)!=-1){
-        stack=2;
-        while(stack=!0);
-    }
-    stack = -1;
-    fclose(fail);
 
     return 0;
 }
