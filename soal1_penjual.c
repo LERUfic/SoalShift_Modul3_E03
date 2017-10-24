@@ -35,7 +35,7 @@ void main()
             }
             else if(menu==2){
                 printf("[nama_barang] [jumlah_barang] > ");
-                scanf("%s %d",&name,&val);
+                scanf("%s %d",name,&val);
                 for(int i=0;i<6;++i){
                     if(!strcmp(senjata[i],name)){
                         stok[i]+=val;
@@ -48,6 +48,6 @@ void main()
 
 
 
-        shmdt(value);
+        shmdt(stok);
         shmctl(shmid, IPC_RMID, NULL);
 }
