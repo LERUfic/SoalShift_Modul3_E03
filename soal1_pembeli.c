@@ -17,7 +17,7 @@ void main()
         strcpy(senjata[4],"SPG1-V3");
         strcpy(senjata[5],"MINE");
 
-        int shmid = shmget(key, sizeof(int)*3, IPC_CREAT | 0666);
+        int shmid = shmget(key, sizeof(int)*6, IPC_CREAT | 0666);
         stok = shmat(shmid, NULL, 0);
 
         char name[50];
