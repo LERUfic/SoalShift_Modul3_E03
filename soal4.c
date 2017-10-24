@@ -24,15 +24,12 @@ int main(int argc,char *argv[]){
     for(int i=1;i<argc;i++){
 
         int j=0;
-        bil=0;
-        while(j<strlen(argv[i])){
-            bil*=10;
-            bil+=(argv[i][j]-48);
-            ++j;
-        }
+        bil=atoi(argv[i]);
+        
         pthread_create(&(tid[i]),NULL,&faktorial,(void*)bil);
         pthread_join(tid[i],NULL);
     }
 
     return 0;
 }
+
