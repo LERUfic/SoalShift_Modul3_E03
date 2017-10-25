@@ -5,7 +5,6 @@
 #include<unistd.h>
 #include<stdlib.h>
 
-int now, hasil=1, bil, status=1;
 
 void* faktorial(void *arg){
     int bil = (int*)arg;
@@ -25,7 +24,7 @@ int main(int argc,char *argv[]){
 
         int j=0;
         bil=atoi(argv[i]);
-        
+
         pthread_create(&(tid[i]),NULL,&faktorial,(void*)bil);
         pthread_join(tid[i],NULL);
     }

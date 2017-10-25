@@ -20,8 +20,7 @@ void* cek_nama(void *arg){
     int count=0;
     char buffer[256];
     strcpy(dicari,arg);
-//    printf("dicari %s\n",dicari);
-    while(fscanf(fail,"%s",&buffer)!=EOF){
+    while(fscanf(fail,"%s",buffer)!=EOF){
         if(strstr(buffer,dicari)!=NULL){
             count++;
         }
@@ -34,16 +33,14 @@ void* cek_nama(void *arg){
 
 int main(int argc,char *argv[]){
 
-if( argc != 3 ) {
-    printf("input invalid , masukkan 2 string\n");
-    return 0;
+pthread_t tid[argc];
+
+for(int i=1;i<argc;++i){
+    pthread_create(&(tid[i]), NULL, &cek_nama,(void *)argv[i]);
 }
-    pthread_create(&(tid1), NULL, &cek_nama,(void *)argv[1]);
-    pthread_create(&(tid2), NULL, &cek_nama,(void *)argv[2]);
-
-    pthread_join(tid1, NULL);
-    pthread_join(tid2, NULL);
-
+for(int i=1;i<argc;++i){
+    pthread_join(tid[i], NULL);
+}
 
     return 0;
 }
